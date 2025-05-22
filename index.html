@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Algorithm Visualizer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap"
+    rel="stylesheet">
+</head>
+
+<body class="bg-gray-50 text-gray-800">
+
+  <div class="container mx-auto p-4 py-8 max-w-4xl">
+    <header>
+      <h1 class="text-3xl md:text-4xl font-bold text-center my-6 md:my-8 text-sky-700">
+        Algorithm Visualizer
+      </h1>
+    </header>
+
+    <nav id="menu"
+      class="font-mono text-sm md:text-base bg-gray-100 p-3 md:p-4 rounded-lg shadow-md mb-8 flex flex-wrap justify-center items-center gap-3 md:gap-4">
+      <div class="flex items-center">
+        <label for="algorithmSelect" class="mr-1 md:mr-2 text-gray-700">Algorithm:</label>
+        <select id="algorithmSelect"
+          class="font-mono p-2 border border-gray-300 rounded-md bg-white focus:outline-none focus:ring-2 focus:ring-sky-500 text-xs md:text-sm shadow-sm">
+          <option value="bubble">Bubble Sort</option>
+          <option value="merge">Merge Sort</option>
+          <option value="quick">Quick Sort</option>
+          <option value="insertion">Insertion Sort</option>
+          <option value="selection">Selection Sort</option>
+          <option value="heap">Heap Sort</option>
+        </select>
+      </div>
+
+      <span class="hidden md:inline mx-1 md:mx-2 text-gray-300">|</span>
+
+      <button id="randomizeButton"
+        class="font-mono p-2 border border-transparent rounded-md bg-sky-500 text-white hover:bg-sky-600 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:ring-offset-2 active:bg-sky-700 transition-colors text-xs md:text-sm shadow-sm">
+        Randomize Data
+      </button>
+
+      <span class="hidden md:inline mx-1 md:mx-2 text-gray-300">|</span>
+
+      <button id="startButton"
+        class="font-mono p-2 border border-transparent rounded-md bg-green-500 text-white hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 active:bg-green-700 transition-colors text-xs md:text-sm shadow-sm">
+        Start Sorting
+      </button>
+    </nav>
+
+    <main>
+      <div id="chartContainer"
+        class="w-full h-80 md:h-96 bg-gray-200 p-2 md:p-4 rounded-lg shadow-inner flex items-end justify-center gap-px md:gap-0.5 overflow-hidden">
+      </div>
+    </main>
+  </div>
+
+  <div id="messageBox"
+    class="fixed bottom-5 right-5 bg-slate-700 text-white p-3 px-5 rounded-lg shadow-xl text-sm transition-all duration-300 opacity-0 translate-y-5 pointer-events-none">
+    This is a message!
+  </div>
+
+  <script type="module" src="js/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+body {
+  font-family: 'Inter', sans-serif;
+}
+
+.font-mono {
+  font-family: 'Roboto Mono', monospace;
+}
+
+.message-box-enter {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.message-box-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.message-box-exit {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+}
+
+.message-box-exit-active {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+#chartContainer {
+  min-height: 300px;
+}
+
+.bar-swapping {
+  transition: height 0.3s ease-in-out, backgroung-color 0.3s ease-in-out !important;
+  background-color: #fbbf24 !important;
+}
