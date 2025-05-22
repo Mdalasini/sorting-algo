@@ -15,11 +15,11 @@ async function partition(bars, low, high) {
 
     if (parseInt(bars[j].dataset.value) < parseInt(pivot.dataset.value)) {
       i++;
-      swapBars(bars[i], bars[j]);
+      await swapBars(bars[i], bars[j]);
     } 
   }
 
-  swapBars(bars[i + 1], bars[high]);
+  await swapBars(bars[i + 1], bars[high]);
 
   return i + 1;
 }

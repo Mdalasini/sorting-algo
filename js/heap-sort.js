@@ -23,7 +23,7 @@ async function heapify(bars, n, i) {
   }
 
   if (largest !== i) {
-    swapBars(bars[i], bars[largest]);
+    await swapBars(bars[i], bars[largest]);
 
     heapify(bars, n, largest);
   }
@@ -40,7 +40,7 @@ async function heapSort(bars) {
   for (let i = Math.floor(n / 2) - 1; i >= 0; i--) heapify(bars, n, i);
 
   for (let i = n - 1; i > 0; i--) {
-    swapBars(bars[0], bars[i]);
+    await swapBars(bars[0], bars[i]);
 
     heapify(bars, i, 0);
   }

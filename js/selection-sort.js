@@ -16,8 +16,7 @@ async function selectionSort(bars) {
       }
     }
 
-    swapBars(bars[i], bars[minIdx]);
-    await sleep(400);
+    await swapBars(bars[i], bars[minIdx]);
   }
 }
 
