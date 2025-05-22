@@ -1,4 +1,5 @@
-import { swapBars } from "./helpers.js";
+import { colors } from "./config.js";
+import { sleep, swapBars } from "./helpers.js";
 
 /**
  * Maintains the heap property for a subtree rooted at index i
@@ -9,10 +10,12 @@ import { swapBars } from "./helpers.js";
  */
 async function heapify(bars, n, i) {
   let largest = i;
-
   let l = 2 * i + 1;
-
   let r = 2 * i + 2;
+
+  bars[i].style.background = colors.orange; // current root
+  if (l < n) bars[l].style.background = colors.yellow; //left child
+  if (r < n) bars[r].style.background = colors.yellow; // right child
 
   if (l < n && parseInt(bars[l].dataset.value) > parseInt(bars[largest].dataset.value)) {
     largest = l;
@@ -23,9 +26,18 @@ async function heapify(bars, n, i) {
   }
 
   if (largest !== i) {
+    bars[largest].style.background = colors.red; // will be swapped
+    await sleep(100);
     await swapBars(bars[i], bars[largest]);
 
-    heapify(bars, n, largest);
+    bars[i].style.background = colors.cyan; // reset
+    bars[largest].style.background = colors.cyan;
+
+    await heapify(bars, n, largest);
+  } else {
+    bars[i].style.background = colors.cyan;
+    if (l < n) bars[l].style.background = colors.cyan;
+    if (r < n) bars[r].style.background = colors.cyan;
   }
 }
 
@@ -37,13 +49,18 @@ async function heapify(bars, n, i) {
 async function heapSort(bars) {
   let n = bars.length;
 
-  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) heapify(bars, n, i);
+  for (let i = Math.floor(n / 2) - 1; i >= 0; i--) await heapify(bars, n, i);
 
   for (let i = n - 1; i > 0; i--) {
+    bars[0].style.background = colors.red; // max being swapped to sorted
+    bars[i].style.background = colors.green;
+    await sleep(100);
     await swapBars(bars[0], bars[i]);
 
-    heapify(bars, i, 0);
+    bars[i].style.background = colors.green; // sorted
+    await heapify(bars, i, 0);
   }
+  bars[0].style.background = colors.green; // final element
 }
 
 export default heapSort;
