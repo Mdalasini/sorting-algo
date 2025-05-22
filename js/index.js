@@ -1,4 +1,5 @@
 import bubbleSort from "./bubble-sort.js";
+import { colors } from "./config.js";
 import heapSort from "./heap-sort.js";
 import insertionSort from "./insertion-sort.js";
 import mergeSort from "./merge-sort.js";
@@ -94,7 +95,7 @@ function renderChart() {
     // Calculate height as a percentage of MAX_VALUE relative to container height
     const barHeightPercentage = (value / MAX_VALUE) * 100;
     bar.style.height = `${barHeightPercentage}%`;
-    bar.style.background = 'oklch(68.5% 0.169 237.323)';
+    bar.style.background = colors.cyan;
 
     bar.classList.add(
       'flex-grow',

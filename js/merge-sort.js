@@ -1,3 +1,4 @@
+import { colors } from "./config.js";
 import { copyBarProperties, sleep } from "./helpers.js";
 
 /**
@@ -18,12 +19,12 @@ async function merge(bars, left, mid, right) {
 
   // Copy data to temp arrays L[] and R[]
   for (let i = 0; i < n1; i++) {
-    bars[left + i].style.background = 'oklch(90.5% 0.182 98.111)';
+    bars[left + i].style.background = colors.yellow;
     await sleep(200);
     L[i] = bars[left + i].cloneNode(true);
   }
   for (let i = 0; i < n2; i++) {
-    bars[mid + 1 + i].style.background = 'oklch(76.9% 0.188 70.08)';
+    bars[mid + 1 + i].style.background = colors.orange;
     await sleep(200);
     R[i] = bars[mid + 1 + i].cloneNode(true);
   }
@@ -35,14 +36,14 @@ async function merge(bars, left, mid, right) {
   while(i < n1 && j < n2) {
     await sleep(200);
     if (parseInt(L[i].dataset.value) <= parseInt(R[j].dataset.value)) {
-      if ((n1 + n2) === bars.length) bars[k].style.background = 'oklch(62.7% 0.194 149.214)';
-      else bars[k].style.background = 'oklch(76.5% 0.177 163.223)';
+      if ((n1 + n2) === bars.length) bars[k].style.background = colors.green;
+      else bars[k].style.background = colors.lightGreen;
 
       copyBarProperties(bars[k], L[i]);
       i++;
     } else {
-      if ((n1 + n2) === bars.length) bars[k].style.background = 'oklch(62.7% 0.194 149.214)';
-      else bars[k].style.background = 'oklch(76.5% 0.177 163.223)';
+      if ((n1 + n2) === bars.length) bars[k].style.background = colors.green;
+      else bars[k].style.background = colors.lightGreen;
 
       copyBarProperties(bars[k], R[j]);
       j++;
@@ -53,8 +54,8 @@ async function merge(bars, left, mid, right) {
   // Copy the remaining elements of L[], if there are any
   while (i < n1) {
     await sleep(200);
-    if ((n1 + n2) === bars.length) bars[k].style.background = 'oklch(62.7% 0.194 149.214)';
-    else bars[k].style.background = 'oklch(76.5% 0.177 163.223)';
+    if ((n1 + n2) === bars.length) bars[k].style.background = colors.green;
+    else bars[k].style.background = colors.lightGreen;
 
     copyBarProperties(bars[k], L[i]);
     i++;
@@ -64,8 +65,8 @@ async function merge(bars, left, mid, right) {
   // Copy the remaining elements of R[], if there are any
   while (j < n2) {
     await sleep(200);
-    if ((n1 + n2) === bars.length) bars[k].style.background = 'oklch(62.7% 0.194 149.214)';
-    else bars[k].style.background = 'oklch(76.5% 0.177 163.223)';
+    if ((n1 + n2) === bars.length) bars[k].style.background = colors.green;
+    else bars[k].style.background = colors.lightGreen;
 
     copyBarProperties(bars[k], R[j]);
     j++;

@@ -1,3 +1,5 @@
+import { colors } from "./config.js";
+
 /**
  * Returns a promise that resolves after a specified time delay
  * @param {number} ms - Time in milliseconds to wait before resolving
@@ -20,8 +22,8 @@ export async function swapBars(bar1, bar2) {
   }
 
   // highlight bars being swapped
-  bar1.style.background = 'oklch(69.6% 0.17 162.48)';
-  bar2.style.background = 'oklch(69.6% 0.17 162.48)';
+  bar1.style.background = colors.lightGreen;
+  bar2.style.background = colors.lightGreen;
 
   // 1. Store properties of bar1
   const tempHeight = bar1.style.height;
@@ -40,8 +42,8 @@ export async function swapBars(bar1, bar2) {
 
   // remove highlight
   await sleep(300);
-  bar1.style.background = 'oklch(68.5% 0.169 237.323)';
-  bar2.style.background = 'oklch(68.5% 0.169 237.323)';
+  bar1.style.background = colors.cyan;
+  bar2.style.background = colors.cyan;
 }
 
 /**

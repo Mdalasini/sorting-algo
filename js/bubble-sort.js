@@ -1,3 +1,4 @@
+import { colors } from "./config.js";
 import { sleep, swapBars } from "./helpers.js";
 
 /**
@@ -15,10 +16,10 @@ async function bubbleSort(bars) {
         swapped = true;
       }
     }
-    bars[bars.length - i - 1].style.background = 'oklch(62.7% 0.194 149.214)';
+    bars[bars.length - i - 1].style.background = colors.green;
     if (swapped === false) break;
   }
-  bars[0].style.background = 'oklch(62.7% 0.194 149.214)';
+  bars[0].style.background = colors.green;
 }
 
 export default bubbleSort;
