@@ -11,9 +11,9 @@ export function sleep(ms) {
  * Swaps the visual properties (height and title) of two bar DOM elements.
  * @param {HTMLElement} bar1
  * @param {HTMLElement} bar2 
- * @returns {void}
+ * @returns {Promise<void>}
  */
-export function swapBars(bar1, bar2) {
+export async function swapBars(bar1, bar2) {
   if (!bar1 || !bar2) {
     console.error("Cannot swap undefined bars.");
     return;
@@ -39,10 +39,9 @@ export function swapBars(bar1, bar2) {
   bar2.dataset.value = tempValue;
 
   // remove highlight
-  setTimeout(() => {
-    bar1.style.background = 'oklch(68.5% 0.169 237.323)';
-    bar2.style.background = 'oklch(68.5% 0.169 237.323)';
-  }, 300);
+  await sleep(300);
+  bar1.style.background = 'oklch(68.5% 0.169 237.323)';
+  bar2.style.background = 'oklch(68.5% 0.169 237.323)';
 }
 
 /**
