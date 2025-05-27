@@ -5,6 +5,7 @@ import insertionSort from "./insertion-sort.js";
 import mergeSort from "./merge-sort.js";
 import quickSort from "./quick-sort.js";
 import selectionSort from "./selection-sort.js";
+import { State } from "./stateManager.js";
 
 const algorithmSelect = document.getElementById('algorithmSelect');
 const randomizeButton = document.getElementById('randomizeButton');
@@ -133,33 +134,62 @@ startButton.addEventListener('click', async () => {
 
   switch (selected) {
     case 'bubble':
+      State.setState(State.SORTING);
       await bubbleSort(bars);
+      State.setState(State.IDLE);
       break;
   
     case 'merge':
+      State.setState(State.SORTING);
       await mergeSort(bars);
+      State.setState(State.IDLE);
       break;
   
     case 'quick':
+      State.setState(State.SORTING);
       await quickSort(bars);
+      State.setState(State.IDLE);
       break;
 
     case 'insertion':
+      State.setState(State.SORTING);
       await insertionSort(bars);
+      State.setState(State.IDLE);
       break;
 
     case 'selection':
+      State.setState(State.SORTING);
       await selectionSort(bars);
+      State.setState(State.IDLE);
       break;
       
     case 'heap':
+      State.setState(State.SORTING);
       await heapSort(bars);
+      State.setState(State.IDLE);
       break;
     default:
       showMessage(`'Start' clicked for ${selected}. Sorting logic not implemented yet!`, 'info');
       break;
   }
 });
+
+function disableControls() {
+  algorithmSelect.disabled = true;
+  randomizeButton.disabled = true;
+  startButton.disabled = true;
+}
+
+function enableControls() {
+  algorithmSelect.disabled = false;
+  randomizeButton.disabled = false;
+  startButton.disabled = false;
+}
+
+const unsubscribe = State.subscribe((newState) => {
+  if (newState === State.SORTING) disableControls();
+  else if (newState === State.IDLE) enableControls();
+})
 
 // Initialize app
 document.addEventListener('DOMContentLoaded', () => {
