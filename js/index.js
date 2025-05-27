@@ -119,6 +119,36 @@ function generateAndRenderDataset() {
   showMessage('New dataset generated!', 'success', 1500);
 }
 
+// Sorting function wrapper
+/**
+ * @callback SortFunction
+ * @param {Array} bars - Array of bar elements to sort
+ * @returns {Promise<void>} - A promise that resolves when sorting is complete
+ */
+
+/**
+ * Wraps a sorting function to automatically set and reset the sorting state.
+ * @param {SortFunction} fn - The sorting function to wrap
+ * @returns {SortFunction} - A new function with state management
+ */
+function withState(fn) {
+  return async (bars) => {
+    State.setState(State.SORTING);
+    await fn(bars);
+    State.setState(State.IDLE);
+  };
+}
+
+// Wrapping sort functions
+const sortFunctions = {
+  bubble: withState(bubbleSort),
+  merge: withState(mergeSort),
+  quick: withState(quickSort),
+  insertion: withState(insertionSort),
+  selection: withState(selectionSort),
+  heap: withState(heapSort),
+}
+
 // Event Listeners
 randomizeButton.addEventListener('click', generateAndRenderDataset);
 
@@ -134,40 +164,12 @@ startButton.addEventListener('click', async () => {
 
   switch (selected) {
     case 'bubble':
-      State.setState(State.SORTING);
-      await bubbleSort(bars);
-      State.setState(State.IDLE);
-      break;
-  
     case 'merge':
-      State.setState(State.SORTING);
-      await mergeSort(bars);
-      State.setState(State.IDLE);
-      break;
-  
     case 'quick':
-      State.setState(State.SORTING);
-      await quickSort(bars);
-      State.setState(State.IDLE);
-      break;
-
     case 'insertion':
-      State.setState(State.SORTING);
-      await insertionSort(bars);
-      State.setState(State.IDLE);
-      break;
-
     case 'selection':
-      State.setState(State.SORTING);
-      await selectionSort(bars);
-      State.setState(State.IDLE);
-      break;
-      
     case 'heap':
-      State.setState(State.SORTING);
-      await heapSort(bars);
-      State.setState(State.IDLE);
-      break;
+      await sortFunctions[selected](bars);
     default:
       showMessage(`'Start' clicked for ${selected}. Sorting logic not implemented yet!`, 'info');
       break;
