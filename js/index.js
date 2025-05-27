@@ -169,6 +169,7 @@ startButton.addEventListener('click', async () => {
     case 'insertion':
     case 'selection':
     case 'heap':
+      showMessage(`${selected} sort is running...`, 'info');
       await sortFunctions[selected](bars);
     default:
       showMessage(`'Start' clicked for ${selected}. Sorting logic not implemented yet!`, 'info');
